@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartMemu : MonoBehaviour
 {
+    void Awake(){
+        BuyAndEquipWeapon.weapons = Resources.LoadAll<Sprite>("Weapons_Btn");
+        BuyAndEquipSkill.skills = Resources.LoadAll<Sprite>("Skills_Btn");
+        Debug.Log("Awake");
+    }
     [SerializeField] GameObject Pause;
     public void PlayGame()
     {

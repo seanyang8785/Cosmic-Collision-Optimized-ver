@@ -11,10 +11,6 @@ public class BuyAndEquipWeapon : MonoBehaviour
     public static float cd = 0;
     public static Sprite[] weapons;
 
-    void Awake(){
-        weapons = Resources.LoadAll<Sprite>("Weapons_Btn");
-    }
-
     void Start(){
         string tag = gameObject.transform.parent.tag;
         Debug.Log(GoodsManager.goods["NB"].status); 
