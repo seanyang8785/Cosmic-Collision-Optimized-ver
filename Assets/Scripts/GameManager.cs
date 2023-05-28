@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         TextMeshProUGUI Score = gameObject.GetComponentsInChildren<TextMeshProUGUI>()[0];
         ScoreText = ScoreNum.ToString();
-        while(ScoreText.Length < 4){
+        while(ScoreText.Length < 5){
             ScoreText = "0" + ScoreText;
         }
         Score.SetText(ScoreText);
