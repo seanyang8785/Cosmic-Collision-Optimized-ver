@@ -10,7 +10,7 @@ public class PauseBackTo : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Additive);
-        ScoreManager.ScoreNum = 0;
+        GameManager.ScoreNum = 0;
     }
 
     public void backToGame(){

@@ -9,7 +9,7 @@ public class StartMemu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        ScoreManager.ScoreNum = 0;
+        GameManager.ScoreNum = 0;
     }
 
     public void Store()

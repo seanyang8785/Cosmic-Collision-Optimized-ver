@@ -15,12 +15,12 @@ public class MTBeAttacked : MonoBehaviour
             float scale = gameObject.transform.localScale.x;
             for(int i = 6;i >= 0;i--){
                 if(scale > i * 10 && i * 10 > 0){
-                    ScoreManager.ScoreNum += i * 10;
+                    GameManager.ScoreNum += i * 10;
                     CoinsManager.Coins +=  i * 10;
                     break;
                 }
                 else if(scale > i * 10 && i * 10 == 0){
-                    ScoreManager.ScoreNum += 1;
+                    GameManager.ScoreNum += 1;
                     CoinsManager.Coins += 1;
                 }
             }
@@ -39,7 +39,7 @@ public class MTBeAttacked : MonoBehaviour
             MTManager MTManager = new MTManager();
             GameObject MTPrefab = (GameObject)Resources.Load("Prefab/Meteor");
             MTManager.DestroyedSpawn(gameObject.transform.position,gameObject.transform.localScale,MTPrefab);
-            ScoreManager.ScoreNum += 1;
+            GameManager.ScoreNum += 1;
             CoinsManager.Coins += 1;
         }
     }
