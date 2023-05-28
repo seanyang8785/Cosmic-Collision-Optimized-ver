@@ -7,6 +7,10 @@ public class BuyAndEquipSkill : MonoBehaviour
 {
     public static List<string> equipped_skill = new List<string>(){"",""};
     public static Sprite[] skills;
+
+    void Awake(){
+        skills = Resources.LoadAll<Sprite>("Weapons_Btn");
+    }
     void Start(){
         skills = Resources.LoadAll<Sprite>("Skills_Btn");
         string tag = gameObject.transform.parent.tag;
