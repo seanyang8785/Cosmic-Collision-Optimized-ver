@@ -6,14 +6,29 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Text ScoreText;
-    public Text LifeText;
+    string ScoreText;
+    string LifeText;
     public static int ScoreNum;
     public static int LifeNum;
+    
+    void Start()
+    {
+        LifeNum = 3;
+    }
 
     void Update()
     {
-        ScoreText.text = "SCORE:" + ScoreNum;
+        TextMeshProUGUI Score = gameObject.GetComponentsInChildren<TextMeshProUGUI>()[0];
+        ScoreText = ScoreNum.ToString();
+        while(ScoreText.Length < 4){
+            ScoreText = "0" + ScoreText;
+        }
+        Score.SetText(ScoreText);
+
+        TextMeshProUGUI Life = gameObject.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        LifeText = LifeNum.ToString();
         
+        
+        Life.SetText(LifeText);
     }
 }

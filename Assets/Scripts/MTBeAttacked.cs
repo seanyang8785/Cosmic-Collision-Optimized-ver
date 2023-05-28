@@ -27,6 +27,7 @@ public class MTBeAttacked : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("No.1")){
             Destroy(collision.gameObject);
+            GameManager.LifeNum -= 1;
             SCManager SCManager = new SCManager();
             SCManager.Spawn(new Vector3(0,0,0),Quaternion.identity);
             Destroy(gameObject.transform.parent.gameObject);
