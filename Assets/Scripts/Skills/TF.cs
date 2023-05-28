@@ -20,7 +20,7 @@ public class TF : MonoBehaviour
 
     IEnumerator TF_s(){
         MTMove.movement = new Vector3(0,0,0);
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(10);
         MTMove.movement = new Vector3(0,30,0);
     }
 }

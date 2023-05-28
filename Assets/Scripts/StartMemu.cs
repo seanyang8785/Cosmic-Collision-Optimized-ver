@@ -10,6 +10,20 @@ public class StartMemu : MonoBehaviour
         BuyAndEquipSkill.skills = Resources.LoadAll<Sprite>("Skills_Btn");
         Debug.Log("Awake");
     }
+
+    void Start(){
+        SCAttack.weapon_Enabled = true;
+        SCAttack.weapon_current_CD = 0;
+        SCAttack.weapon_CD = 0;
+        
+        SkillManager.Skill_1_Enabled = true;
+        SkillManager.Skill_1_current_CD = 0;
+        SkillManager.Skill_1_CD = 0;
+
+        SkillManager.Skill_2_Enabled = true;
+        SkillManager.Skill_2_current_CD = 0;
+        SkillManager.Skill_2_CD = 0;
+    }
     [SerializeField] GameObject Pause;
     public void PlayGame()
     {

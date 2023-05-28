@@ -12,13 +12,13 @@ TagManager:
   - SG
   - STL
   - SEL
-  - EB
   - TV
   - TF
   - ES
   - SS
   - EO
   - QS
+  - SB
   layers:
   - Default
   - TransparentFX

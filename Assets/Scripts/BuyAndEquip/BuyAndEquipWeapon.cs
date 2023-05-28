@@ -5,10 +5,8 @@ using TMPro;
 
 public class BuyAndEquipWeapon : MonoBehaviour
 {
-    public static string equipped_weapon = "NB"; 
-    public static bool equip_W = false;
+    public static string equipped_weapon = "NB";
     public static int count = 0;
-    public static float cd = 0;
     public static Sprite[] weapons;
 
     void Start(){
@@ -38,7 +36,6 @@ public class BuyAndEquipWeapon : MonoBehaviour
             GoodsManager.spend = true;  
         }
         else if(GoodsManager.goods[tag].status == 1 && equipped_weapon == ""){
-            Debug.Log(equip_W);
             GoodsManager.goods_info good_Info = GoodsManager.goods[tag];
             good_Info.status = 2;
             GoodsManager.goods[tag] = good_Info;

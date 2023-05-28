@@ -9,6 +9,7 @@ public class BuyAndEquipSkill : MonoBehaviour
     public static Sprite[] skills;
     
     void Start(){
+        Debug.Log(equipped_skill);
         string tag = gameObject.transform.parent.tag;
         Debug.Log(GoodsManager.goods["EO"].status); 
         if(GoodsManager.goods[tag].status == 1){

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class MTMove : MonoBehaviour
 {
-    public static Vector3 movement;
-    void Start(){
-        movement = new Vector3(0,30f,0);
-    }
+    public static Vector3 movement = new Vector3(0,30f,0);
     void FixedUpdate()
     {
         Transform meteorsParentTrans = GetComponentsInParent<Transform>()[1];
