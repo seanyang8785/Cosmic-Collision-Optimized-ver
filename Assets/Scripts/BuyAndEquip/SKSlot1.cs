@@ -15,27 +15,27 @@ public class SKSlot1 : MonoBehaviour
             string current_skill1 = BuyAndEquipSkill.equipped_skill[0];
             Image image = gameObject.GetComponent<Image>();
             // gameObject.GetComponent<Image>().enabled = false;
-            if(current_skill1 == "TV"){
+            if(current_skill1 == "TV" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[0];
                 image.color = new Color32(255,255,255,255);
             }
-            else if(current_skill1 == "TF"){
+            else if(current_skill1 == "TF" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[1];
                 image.color = new Color32(255,255,255,255);
             }
-            else if(current_skill1 == "ES"){
+            else if(current_skill1 == "ES" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[2];
                 image.color = new Color32(255,255,255,255);
             }
-            else if(current_skill1 == "SS"){
+            else if(current_skill1 == "SS" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[3];
                 image.color = new Color32(255,255,255,255);
             }
-            else if(current_skill1 == "EO"){
+            else if(current_skill1 == "EO" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[4];
                 image.color = new Color32(255,255,255,255);
             }
-            else if(current_skill1 == "QS"){
+            else if(current_skill1 == "QS" && SkillManager.Skill_1_Enabled){
                 image.sprite = BuyAndEquipSkill.skills[5];
                 image.color = new Color32(255,255,255,255);
             }
@@ -44,28 +44,35 @@ public class SKSlot1 : MonoBehaviour
 
     void FixedUpdate(){
         if(!SkillManager.Skill_1_Enabled){
-            SkillManager.Skill_1_CD -= Time.deltaTime;
-            Debug.Log(SkillManager.Skill_1_CD);
-            if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 1){
+            Debug.Log(SkillManager.Skill_1_current_CD);
+            SkillManager.Skill_1_current_CD -= Time.deltaTime;
+            if(0.75 < SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD && SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 1){
                 Image image = gameObject.GetComponent<Image>();
+                Debug.Log(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD);
                 image.color = new Color32(255,255,255,51);
             }
-            else if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.75){
+            else if(0.5 < SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD && SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.75){
                 Image image = gameObject.GetComponent<Image>();
+                Debug.Log(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD);
                 image.color = new Color32(255,255,255,102);
             }   
-            else if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.5){
+            else if(0.25 < SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD && SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.5){
                 Image image = gameObject.GetComponent<Image>();
+                Debug.Log(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD);
                 image.color = new Color32(255,255,255,153);
             }  
-            else if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.25){
+            else if(0 < SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD && SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD < 0.25){
                 Image image = gameObject.GetComponent<Image>();
+                Debug.Log(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD);
                 image.color = new Color32(255,255,255,204);
             }  
-            else if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD == 0){
+            else if(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD <= 0){
                 Image image = gameObject.GetComponent<Image>();
+                Debug.Log(SkillManager.Skill_1_current_CD/SkillManager.Skill_1_CD);
                 image.color = new Color32(255,255,255,255);
                 SkillManager.Skill_1_Enabled = true;
+                SkillManager.Skill_1_current_CD = 0;
+                SkillManager.Skill_1_CD = 0;
             } 
         }
     }

@@ -8,10 +8,10 @@ public class BuyAndEquipWeapon : MonoBehaviour
     public static string equipped_weapon = "NB"; 
     public static bool equip_W = false;
     public static int count = 0;
+    public static float cd = 0;
     public static Sprite[] weapons;
 
     void Start(){
-        weapons = Resources.LoadAll<Sprite>("Weapons_Btn");
         string tag = gameObject.transform.parent.tag;
         Debug.Log(GoodsManager.goods["NB"].status); 
         if(GoodsManager.goods[tag].status == 1){
