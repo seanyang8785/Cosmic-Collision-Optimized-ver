@@ -11,14 +11,14 @@ public class TV : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movement = new Vector3(0,1000,0);
+        movement = new Vector3(0,750,0);
         startpoint = transform.position;
     }
 
     void FixedUpdate()
     {
         time += Time.deltaTime;
-        if(time > 0.5f){
+        if(time > 2f){
             Destroy(gameObject);
             // SkillManager.SkillActived = 0;
         }

@@ -15,7 +15,7 @@ public class StartMemu : MonoBehaviour
         SCAttack.weapon_Enabled = true;
         SCAttack.weapon_current_CD = 0;
         SCAttack.weapon_CD = 0;
-        
+
         SkillManager.Skill_1_Enabled = true;
         SkillManager.Skill_1_current_CD = 0;
         SkillManager.Skill_1_CD = 0;

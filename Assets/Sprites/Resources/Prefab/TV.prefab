@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3245687877467297682}
   - component: {fileID: 3467852709252162459}
   - component: {fileID: 2222118953970978661}
-  - component: {fileID: 4311152538811259461}
+  - component: {fileID: 6269465331061460837}
   m_Layer: 0
   m_Name: TV
   m_TagString: Bullet
@@ -278,7 +278,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4311152538811259461
+--- !u!114 &6269465331061460837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7914732803856039200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 077c67feefdd50446a45d6054f7e816f, type: 3}
+  m_Script: {fileID: 11500000, guid: f0e6dbab2a33b22448eb3e2879258df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2

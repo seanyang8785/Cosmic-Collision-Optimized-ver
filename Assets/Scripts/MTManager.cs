@@ -29,6 +29,7 @@ public class MTManager : MonoBehaviour
             spacecraft = GameObject.FindGameObjectWithTag("No.1");
             SCtrans = spacecraft.GetComponent<Transform>();
             ScPos = SCtrans.position;
+
             amount += 1;
             Spawn(amount,MTPrefab);
         }
@@ -45,7 +46,7 @@ public class MTManager : MonoBehaviour
             float xDif = spawnpoint.x - ScPos.x;
             float yDif = spawnpoint.y - ScPos.y;
                 
-            while(Mathf.Sqrt(Mathf.Pow(xDif,2) + Mathf.Pow(yDif,2)) < 300){
+            while(Mathf.Sqrt(Mathf.Pow(xDif,2) + Mathf.Pow(yDif,2)) < 400){
                 spawnpoint = new Vector3(Random.Range(960.0f,-960.0f),Random.Range(540.0f,-540.0f),0);
                 xDif = spawnpoint.x - ScPos.x;
                 yDif = spawnpoint.y - ScPos.y;
