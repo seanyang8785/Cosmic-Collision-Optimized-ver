@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MTManager : MonoBehaviour
 {
     [SerializeField] GameObject spacecraft;
-    public int amount = 3;
+    public static int amount = 3;
     Transform SCtrans;
     Vector3 ScPos;
     Sprite[] sprites;
@@ -14,8 +14,9 @@ public class MTManager : MonoBehaviour
     GameObject newMeteorC;
 
     void Start() {
+        amount = 3;
         if(SceneManager.GetActiveScene().buildIndex == 1 && GameObject.FindGameObjectWithTag("Meteor") == null){
-            Spawn(5,MTPrefab);
+            Spawn(3,MTPrefab);
         }
         if(MTPrefab == null){
             Debug.Log("MTPrefab doesn't exist.");
@@ -24,13 +25,12 @@ public class MTManager : MonoBehaviour
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1 && GameObject.FindGameObjectWithTag("Meteor") == null){
+        if(SceneManager.GetActiveScene().buildIndex == 1 && GameObject.FindGameObjectWithTag("Meteor") == null && !GameManager.gameover && GameObject.FindGameObjectWithTag("No.1") != null){
             spacecraft = GameObject.FindGameObjectWithTag("No.1");
             SCtrans = spacecraft.GetComponent<Transform>();
             ScPos = SCtrans.position;
-            MTManager MTManager = new MTManager();
             amount += 1;
-            MTManager.Spawn(amount,MTPrefab);
+            Spawn(amount,MTPrefab);
         }
         if(MTPrefab == null){
             Debug.Log("MTPrefab doesn't exist.");

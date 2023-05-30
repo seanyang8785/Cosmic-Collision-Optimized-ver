@@ -10,10 +10,17 @@ public class GameManager : MonoBehaviour
     string LifeText;
     public static int ScoreNum;
     public static int LifeNum;
+    [SerializeField] GameObject Game_0;
+    [SerializeField] GameObject Gameover_0;
+    [SerializeField] public static GameObject Game;
+    [SerializeField] public static GameObject Gameover;
+    public static bool gameover;
     
     void Start()
     {
         LifeNum = 3;
+        Game = Game_0; 
+        Gameover = Gameover_0;
     }
 
     void Update()
@@ -30,5 +37,17 @@ public class GameManager : MonoBehaviour
         
         
         Life.SetText(LifeText);
+
+        if(LifeNum <= 0){
+            Game.SetActive(false);
+            Gameover.SetActive(true);
+            gameover = true;
+            PauseGame.PauseStatus = true;
+            GameObject[] Meteors = GameObject.FindGameObjectsWithTag("Meteor");
+            for(int i = 0;i < Meteors.Length;i++){
+                Destroy(Meteors[i]);
+            }
+            Destroy(GameObject.FindGameObjectWithTag("No.1"));
+        }
     }
 }

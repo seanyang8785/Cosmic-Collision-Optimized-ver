@@ -7,7 +7,7 @@ public class SCAttack : MonoBehaviour
     Sprite[] bullets;
     // float CDtime = 0;
     public static float ShootSpeed = 0.3f;
-    public static bool weapon_Enabled = false;
+    public static bool weapon_Enabled = true;
     public static float weapon_CD = 0.3f;
     public static float weapon_current_CD = 0.3f;
     [SerializeField] GameObject NB;

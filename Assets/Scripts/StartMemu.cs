@@ -11,7 +11,7 @@ public class StartMemu : MonoBehaviour
         Debug.Log("Awake");
     }
 
-    void Start(){
+    public static void Start(){
         SCAttack.weapon_Enabled = true;
         SCAttack.weapon_current_CD = 0;
         SCAttack.weapon_CD = 0;
@@ -23,8 +23,12 @@ public class StartMemu : MonoBehaviour
         SkillManager.Skill_2_Enabled = true;
         SkillManager.Skill_2_current_CD = 0;
         SkillManager.Skill_2_CD = 0;
+
+        MTManager.amount = 2;
+        GameManager.ScoreNum = 0;
+        GameManager.LifeNum = 3;
     }
-    [SerializeField] GameObject Pause;
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

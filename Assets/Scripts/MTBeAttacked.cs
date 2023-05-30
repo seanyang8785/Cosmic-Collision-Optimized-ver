@@ -15,8 +15,8 @@ public class MTBeAttacked : MonoBehaviour
             float scale = gameObject.transform.localScale.x;
             for(int i = 6;i >= 0;i--){
                 if(scale > i * 10 && i * 10 > 0){
-                    GameManager.ScoreNum += i * 10;
-                    CoinsManager.Coins +=  i * 10;
+                    GameManager.ScoreNum += i * 5;
+                    CoinsManager.Coins +=  i * 5;
                     break;
                 }
                 else if(scale > i * 10 && i * 10 == 0){
