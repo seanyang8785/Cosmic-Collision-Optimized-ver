@@ -5,7 +5,8 @@ using TMPro;
 
 public class CoinsManager : MonoBehaviour
 {
-    public static int Coins = 400;
+    public static int Coins = 0;
+    // public static int Coins = 400;
 
     void Start(){
         TextMeshProUGUI text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
