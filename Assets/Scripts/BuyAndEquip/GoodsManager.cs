@@ -23,7 +23,7 @@ public class GoodsManager : MonoBehaviour
             List<string> names = new List<string>(){"NB","SG","STL","SEL","SB","TV","TF","ES","SS","EO","QS"};
             List<int> statuses = new List<int>(){2,0,0,0,0,0,0,0,0,0,0};
             List<int> prices = new List<int>(){0,10,20,30,40,100,125,150,175,200,250};
-            List<float> cds = new List<float>(){0.3f,0.5f,0.75f,0.75f,0.75f,10,10,15,20,60,20};
+            List<float> cds = new List<float>(){0.3f,0.5f,0.75f,0.75f,0.75f,10,20,20,20,60,20};
 
             for(int i = 0;i < names.Count;i ++){
                 goods_info good_info_temp = new goods_info();
@@ -31,8 +31,9 @@ public class GoodsManager : MonoBehaviour
                 good_info_temp.price = prices[i];
                 good_info_temp.status = statuses[i];
                 good_info_temp.cd = cds[i];
-                // Debug.Log(names[i]); 
+                 
                 goods.Add(names[i],good_info_temp);
+                Debug.Log(names[i]+" " +goods[names[i]].cd.ToString());
             }
             first = false;
         }
