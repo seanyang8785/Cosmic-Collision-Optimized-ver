@@ -8,6 +8,7 @@ public class BackTo : MonoBehaviour
     public void backToMainMenu(){
         // SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        GameManager.gameover = false;
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

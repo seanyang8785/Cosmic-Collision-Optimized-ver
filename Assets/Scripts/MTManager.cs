@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MTManager : MonoBehaviour
 {
     [SerializeField] GameObject spacecraft;
-    public static int amount = 3;
+    public static int amount;
     Transform SCtrans;
     Vector3 ScPos;
     Sprite[] sprites;
@@ -14,9 +14,15 @@ public class MTManager : MonoBehaviour
     GameObject newMeteorC;
 
     void Start() {
-        amount = 3;
         if(SceneManager.GetActiveScene().buildIndex == 1 && GameObject.FindGameObjectWithTag("Meteor") == null){
-            Spawn(3,MTPrefab);
+            GameManager.difficultyUpdate();
+            if(GameManager.difficulty <= 5){
+                amount = 3;
+            }
+            else{
+                amount = GameManager.difficulty - 2;
+            }
+            Spawn(amount,MTPrefab);
         }
         if(MTPrefab == null){
             Debug.Log("MTPrefab doesn't exist.");
@@ -75,15 +81,25 @@ public class MTManager : MonoBehaviour
     {
         // Debug.Log(spawnpoint +","+scale);
         sprites = Resources.LoadAll<Sprite>("Meteors");
-        float random_angle = Random.Range(0.1f,960.0f);
+        float random_angle = Random.Range(0.1f,360.0f);
         int random_sprite = Random.Range(0,11);
         if(scale.x * 0.5f >=  15f){
-            for(int i = 0;i < 2;i++){
-                if(i == 0){
-                    newMeteorC = Instantiate(prefab,spawnpoint,Quaternion.Euler(0,0,random_angle));
-                }else{
-                    newMeteorC = Instantiate(prefab,spawnpoint,Quaternion.Euler(0,0,960-random_angle));
-                }
+            float regenAmount = 0;
+            if(GameManager.difficulty <= 2){
+                regenAmount = 2.0f;
+            }
+            else if(GameManager.difficulty <= 5){
+                regenAmount = 3.0f;
+            }
+            else if(GameManager.difficulty <= 8){
+                regenAmount = 4.0f;
+            }
+            else{
+                regenAmount = 5.0f;
+            }
+            for(int i = 0;i < (int)regenAmount;i++){
+                newMeteorC = Instantiate(prefab,spawnpoint,Quaternion.Euler(0,0,random_angle+360.0f/regenAmount*i));
+                Debug.Log(360.0f/regenAmount*i);
 
                 GameObject newMeteorCC = newMeteorC.transform.GetChild(0).gameObject;
                 float times = Random.Range(0.5f,0.8f);
