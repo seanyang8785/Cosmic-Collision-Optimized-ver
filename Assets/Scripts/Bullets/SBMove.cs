@@ -5,7 +5,6 @@ using UnityEngine;
 public class SBMove : MonoBehaviour
 {
     Vector3 movement;
-    Vector3 startpoint;
     float time = 0;
     int status = 0;
     int times = 5;
@@ -14,7 +13,6 @@ public class SBMove : MonoBehaviour
     void Start()
     {
         movement = new Vector3(0,1000,0);
-        startpoint = transform.position;
     }
 
     void FixedUpdate()

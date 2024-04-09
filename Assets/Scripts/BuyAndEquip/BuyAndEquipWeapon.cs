@@ -6,7 +6,6 @@ using TMPro;
 public class BuyAndEquipWeapon : MonoBehaviour
 {
     public static string equipped_weapon = "NB";
-    public static int count = 0;
     public static Sprite[] weapons;
 
     void Start(){

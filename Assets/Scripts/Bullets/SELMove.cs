@@ -6,8 +6,6 @@ public class SELMove : MonoBehaviour
 {
     float time = 0;
     int count = -80;
-    Vector3 startDir;
-    [SerializeField] float rotateSpeed = 200;
     public Transform SCTrans;
     // Start is called before the first frame update
 
@@ -21,9 +19,9 @@ public class SELMove : MonoBehaviour
     void FixedUpdate(){
         time += Time.deltaTime;
         count += 12;
-        if(time > 0.25f){
+        if(time > 0.45f){
             Destroy(gameObject);
         }
-        transform.rotation = Quaternion.Euler(0,0,SCRotate.rotation+count);
+        transform.rotation = Quaternion.Euler(0,0,SCMove.rotation+count);
     }
 }

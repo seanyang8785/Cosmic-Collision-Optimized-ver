@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 756d90cda0ebbe24b9b8cfddd3808196
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spacecraft: {instanceID: 0}
+  - SCtrans: {instanceID: 0}
+  - spriteR: {instanceID: 0}
+  - MTPrefab: {fileID: 5765957047092363657, guid: 37b5552a2f232154a99376407298fd74, type: 3}
+  - meteors: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

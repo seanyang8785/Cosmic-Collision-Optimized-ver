@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,22 +13,45 @@ public class GameManager : MonoBehaviour
     public static int LifeNum;
     [SerializeField] GameObject Game_0;
     [SerializeField] GameObject Gameover_0;
-    [SerializeField] public static GameObject Game;
-    [SerializeField] public static GameObject Gameover;
+    public static GameObject Game;
+    public static GameObject Gameover;
     public static bool gameover;
     public static int difficulty = 0;
-
+    public static int[] Record = {0,0};
     
     void Start()
     {
         LifeNum = 3;
         Game = Game_0; 
         Gameover = Gameover_0;
+        // GameObject.FindGameObjectWithTag("HUD").transform.position = new Vector3(0,-600*Screen.height/1440,0);
+        // Debug.Log(-(Screen.height/2)+300*Screen.height/1440);
         difficultyUpdate();
     }
 
     public static void difficultyUpdate(){
-        difficulty = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[0]].difficultyCount + GoodsManager.goods[BuyAndEquipSkill.equipped_skill[1]].difficultyCount + GoodsManager.goods[BuyAndEquipWeapon.equipped_weapon].difficultyCount;
+        if(BuyAndEquipSkill.equipped_skill[0] != "" && BuyAndEquipSkill.equipped_skill[1] != ""){
+            difficulty = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[0]].difficultyCount + GoodsManager.goods[BuyAndEquipSkill.equipped_skill[1]].difficultyCount + GoodsManager.goods[BuyAndEquipWeapon.equipped_weapon].difficultyCount;
+        }
+        else if(BuyAndEquipSkill.equipped_skill[0] != ""){
+            difficulty = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[0]].difficultyCount + GoodsManager.goods[BuyAndEquipWeapon.equipped_weapon].difficultyCount;
+        }
+        else{
+            difficulty = GoodsManager.goods[BuyAndEquipWeapon.equipped_weapon].difficultyCount;
+        }
+        
+        if(difficulty <= 3){
+            MTManager.amount = 2;
+        }
+        else if(difficulty <= 6){
+            MTManager.amount = 3;
+        }
+        else if(difficulty <= 9){
+            MTManager.amount = 4;
+        }
+        else{
+            MTManager.amount = 5;
+        }
     }
 
     void Update()
@@ -58,6 +83,7 @@ public class GameManager : MonoBehaviour
                 Destroy(Meteors[i]);
             }
             Destroy(GameObject.FindGameObjectWithTag("No.1"));
+            PauseBackTo.makeRecord();
         }
     }
 }

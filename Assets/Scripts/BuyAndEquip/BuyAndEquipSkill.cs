@@ -11,7 +11,11 @@ public class BuyAndEquipSkill : MonoBehaviour
     void Start(){
         Debug.Log(equipped_skill);
         string tag = gameObject.transform.parent.tag;
-        Debug.Log(GoodsManager.goods["EO"].status); 
+        // Debug.Log(GoodsManager.goods["EO"].status);
+        if(GoodsManager.goods[tag].status == 1){
+            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
+            text.SetText("Buy it!");
+        }
         if(GoodsManager.goods[tag].status == 1){
             TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");

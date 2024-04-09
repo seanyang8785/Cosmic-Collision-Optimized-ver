@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ES : MonoBehaviour
 {
-    Transform SCTrans;
     [SerializeField] public GameObject Shield;
     void Update()
     {

@@ -11,7 +11,7 @@ public class Wave : MonoBehaviour
         Debug.Log(scale);
         gameObject.transform.localScale = new Vector3(scale.x *  times,scale.y * times,0);
     }
-    // Update is called once per frame
+
     void Update()
     {
         if(scale.x >= 500){

@@ -35,6 +35,10 @@ TagManager:
   - R10
   - Remove
   - GameoverScore
+  - HighestRecord
+  - YourRecord
+  - HUD
+  - Debug
   layers:
   - Default
   - TransparentFX
@@ -42,7 +46,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Meteor
   - 
   - 
   - 
