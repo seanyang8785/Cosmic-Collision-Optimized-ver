@@ -33,8 +33,8 @@ public class Save : MonoBehaviour
             sw.Close();
             fs.Close();
         }
-    }
-
+    }   
+    
     public static void readRecordFile(){
         // Debug.Log("Read");
         FileStream fs = new FileStream(Application.dataPath + "/Data.txt",FileMode.Open);
