@@ -18,7 +18,6 @@ public class EO : MonoBehaviour
     }
 
     IEnumerator EO_s(float sec){
-        Debug.Log("in");
         yield return new WaitForSecondsRealtime(sec);
         Instantiate(Wave,transform.position,transform.rotation);
     }
