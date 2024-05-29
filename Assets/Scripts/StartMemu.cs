@@ -86,15 +86,15 @@ public class StartMemu : MonoBehaviour
             GoodsManager.goods[GoodsManager.names[i]] = good_Info;
             // GoodsManager.goods[t]
         }
-        if(File.Exists(Application.dataPath + "/Data.txt")){
-            FileStream fs = new FileStream(Application.dataPath + "/Data.txt",FileMode.Open);
+        if(File.Exists(Application.persistentDataPath + "/Data.txt")){
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Data.txt",FileMode.Open);
             StreamReader sr = new StreamReader(fs);
             int HighestRecord;
             HighestRecord = int.Parse(sr.ReadLine());
             sr.Close(); 
             fs.Close(); 
 
-            StreamWriter sw = new StreamWriter(Application.dataPath + "/Data.txt",append:false);                    
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Data.txt",append:false);                    
             sw.WriteLine(HighestRecord);
             sw.WriteLine(0);
             sw.Close();

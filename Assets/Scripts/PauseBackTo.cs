@@ -38,8 +38,8 @@ public class PauseBackTo : MonoBehaviour
     } 
 
     public static void makeRecord(){
-        if(File.Exists(Application.dataPath + "/Data.txt")){
-            FileStream fs = new FileStream(Application.dataPath + "/Data.txt",FileMode.Open);
+        if(File.Exists(Application.persistentDataPath + "/Data.txt")){
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Data.txt",FileMode.Open);
             StreamReader sr = new StreamReader(fs);
             int count = 0;
             while(!sr.EndOfStream){
@@ -49,7 +49,7 @@ public class PauseBackTo : MonoBehaviour
             sr.Close(); 
             fs.Close();    
             
-            StreamWriter sw = new StreamWriter(Application.dataPath + "/Data.txt",append:false);                    
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Data.txt",append:false);                    
             if(GameManager.Record[0] < GameManager.ScoreNum){
                 sw.WriteLine(GameManager.ScoreNum + "\n" + GameManager.ScoreNum);
             }
