@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System.IO;
-using System;
+using Unity.Services.Authentication;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameObject Gameover;
     public static bool gameover;
     public static int difficulty = 0;
-    public static int[] Record = {0,0};
+    public static int anonymous = 0;
     
     void Start()
     {
@@ -84,6 +81,16 @@ public class GameManager : MonoBehaviour
             }
             Destroy(GameObject.FindGameObjectWithTag("No.1"));
             PauseBackTo.makeRecord();
+        }
+    }
+
+    void OnApplicationQuit() {
+        if(AuthenticationService.Instance.IsSignedIn){
+            if(SigningGUI.anonymous){
+                Save.playerRecords.Remove(SigningGUI.username);
+                SigningGUI.anonymous = false;
+            }
+            AuthenticationService.Instance.SignOut();
         }
     }
 }
