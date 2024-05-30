@@ -6,14 +6,9 @@ using Newtonsoft.Json;
 
 public class Save : MonoBehaviour
 {
-    public struct playerScoreRecord{
-        public string playerName;
-        public uint score;
-    }
-
     public struct playerRecord{
         public string playerName;
-        public uint score;
+        public int score;
         public string weapon;
         public string skill1;
         public string skill2;
@@ -27,18 +22,18 @@ public class Save : MonoBehaviour
         createRecordFile();
         // if(File.Exists(Application.persistentDataPath + "/anonymous.json") && firstLaunch){
         //     StreamReader sr = new StreamReader(Application.persistentDataPath + "/anonymous.json");                    
-        //     string anonymousRecord = sr.ReadLine();
+        //     string anonymousRecord = sr.ReadToEnd();
         //     anonymousRecords = JsonConvert.DeserializeObject<SortedSet<string>>(anonymousRecord);
         // }
         if(File.Exists(Application.persistentDataPath+"/Leaders.json") && firstLaunch){
             StreamReader sr = new StreamReader(Application.persistentDataPath+"/Leaders.json");
-            string leaderRecord = sr.ReadLine();
+            string leaderRecord = sr.ReadToEnd();
             rankRecords = JsonConvert.DeserializeObject<Dictionary<int,playerRecord>>(leaderRecord);
             sr.Close();
         }
         if(File.Exists(Application.persistentDataPath+"/Players.json") && firstLaunch){
             StreamReader sr = new StreamReader(Application.persistentDataPath+"/Players.json");
-            string playerRecord = sr.ReadLine();
+            string playerRecord = sr.ReadToEnd();
             playerRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(playerRecord);
             sr.Close();
         }
@@ -54,7 +49,6 @@ public class Save : MonoBehaviour
         //     fs.Close();
         // }
         if(!File.Exists(Application.persistentDataPath + "/Leaders.json")){
-            FileStream fs = new FileStream(Application.persistentDataPath + "/Leaders.json",FileMode.CreateNew);
             StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
             
             playerRecord highestScorePlayer = new playerRecord{
@@ -63,45 +57,40 @@ public class Save : MonoBehaviour
             };
 
             rankRecords.Add(0,highestScorePlayer);
+            for(int i = 0;i < 5;i++){
+                rankRecords.Add(0,new playerRecord());
+            }
             sw.WriteLine(JsonConvert.SerializeObject(rankRecords));
             sw.Close();
-            fs.Close();
         }
 
         if(!File.Exists(Application.persistentDataPath + "/Players.json")){
-            FileStream fs = new FileStream(Application.persistentDataPath + "/Players.json",FileMode.CreateNew);
             StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
-
             playerRecords.Add("HighestScore",0);
-            sw.WriteLine(JsonConvert.SerializeObject(rankRecords));
+            sw.WriteLine(JsonConvert.SerializeObject(playerRecords));
             sw.Close();
-            fs.Close();
         }
     }   
     
     // public static void readAnonymousRecordFile(){
     //     FileStream fs = new FileStream(Application.persistentDataPath + "/anonymous.json",FileMode.Open);
     //     StreamReader sr = new StreamReader(fs);
-    //     GameManager.anonymous = int.Parse(sr.ReadLine());
+    //     GameManager.anonymous = int.Parse(sr.ReadToEnd());
     //     sr.Close(); 
     //     fs.Close();
     // }
 
     public static void readLeaderRecordFile(){
-        FileStream fs = new FileStream(Application.persistentDataPath + "/Leaders.json",FileMode.Open);
-        StreamReader sr = new StreamReader(fs);
-        string leaderRecord = sr.ReadLine();
+        StreamReader sr = new StreamReader(Application.persistentDataPath + "/Leaders.json");
+        string leaderRecord = sr.ReadToEnd();
         sr.Close(); 
-        fs.Close();
         rankRecords = JsonConvert.DeserializeObject<Dictionary<int,playerRecord>>(leaderRecord);
     }
 
     public static void readPlayerRecordFile(){
-        FileStream fs = new FileStream(Application.persistentDataPath + "/Players.json",FileMode.Open);
-        StreamReader sr = new StreamReader(fs);
-        string playerRecord = sr.ReadLine();
+        StreamReader sr = new StreamReader(Application.persistentDataPath + "/Players.json");
+        string playerRecord = sr.ReadToEnd();
         sr.Close(); 
-        fs.Close();
         playerRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(playerRecord);
     }
 }

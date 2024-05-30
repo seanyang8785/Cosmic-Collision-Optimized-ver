@@ -3,6 +3,7 @@ using UnityEngine;
 using Unity.Services.Authentication;
 using TMPro;
 using Unity.Services.Core;
+using Newtonsoft.Json;
 
 public class SigningGUI : MonoBehaviour
 {
@@ -25,13 +26,19 @@ public class SigningGUI : MonoBehaviour
     }
     async public void WithAnonymous(){
         username = anonymousNameInput.GetComponent<TMP_InputField>().text;
-        if(username != "" && !Save.playerRecords.ContainsKey(username)){
+        if(username != ""){
+            username += "-ano.";
             try{
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 Debug.Log("Logged in anonymously.");
                 PlayerPrefs.DeleteKey("username");
                 PlayerPrefs.SetString("username",username);
-                Save.playerRecords.Add(username,0);
+                if(!Save.playerRecords.ContainsKey(username)){
+                    Save.playerRecords.Add(username,0);  
+                    StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
+                    sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
+                    sw.Close();
+                }
                 changeCanvas();
                 anonymous = true;
             }
@@ -78,7 +85,13 @@ public class SigningGUI : MonoBehaviour
                 await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
                 Debug.Log("Logged in with username and password.");
                 PlayerPrefs.DeleteKey("username");
-                PlayerPrefs.SetString("username",username);  
+                PlayerPrefs.SetString("username",username);
+                if(!Save.playerRecords.ContainsKey(username)){
+                    Save.playerRecords.Add(username,0);  
+                    StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
+                    sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
+                    sw.Close();
+                }  
                 changeCanvas();
             }
             catch(AuthenticationException ex){
@@ -94,6 +107,9 @@ public class SigningGUI : MonoBehaviour
         if(AuthenticationService.Instance.IsSignedIn){
             if(anonymous){
                 Save.playerRecords.Remove(username);
+                StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
+                sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
+                sw.Close();
                 anonymous = false;
             }
             AuthenticationService.Instance.SignOut();

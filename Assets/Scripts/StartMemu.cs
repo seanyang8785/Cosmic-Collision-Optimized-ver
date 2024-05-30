@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
+using Newtonsoft.Json;
 
 public class StartMemu : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class StartMemu : MonoBehaviour
         Save.readLeaderRecordFile();
         Save.readPlayerRecordFile();
         Debug.Log("Start");
-        uint HighestRecord = Save.rankRecords[0].score;
+        int HighestRecord = Save.rankRecords[0].score;
         int YourRecord = Save.playerRecords[SigningGUI.username];
         if(HighestRecord < 10){
             HighestRecord_s = "00" + HighestRecord.ToString();
@@ -89,16 +90,17 @@ public class StartMemu : MonoBehaviour
             // GoodsManager.goods[t]
         }
         if(File.Exists(Application.persistentDataPath + "/Leaders.json")){
-            FileStream fs = new FileStream(Application.persistentDataPath + "/Data.txt",FileMode.Open);
-            StreamReader sr = new StreamReader(fs);
-            int HighestRecord;
-            HighestRecord = int.Parse(sr.ReadLine());
-            sr.Close(); 
-            fs.Close(); 
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
 
-            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Data.txt",append:false);                    
-            sw.WriteLine(HighestRecord);
-            sw.WriteLine(0);
+            Dictionary<int,Save.playerRecord> rankRecords = new Dictionary<int, Save.playerRecord>();
+            
+            Save.playerRecord highestScorePlayer = new Save.playerRecord{
+                playerName = "HighestScore",
+                score = 0,
+            };
+
+            rankRecords.Add(0,highestScorePlayer);
+            sw.WriteLine(JsonConvert.SerializeObject(rankRecords));
             sw.Close();
         }
         Start();
@@ -108,7 +110,7 @@ public class StartMemu : MonoBehaviour
         Application.Quit();
     }
 
-    public void RankList(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+    public void LeaderBoard(){
+        SceneManager.LoadScene("LeaderBoard");
     }
 }
