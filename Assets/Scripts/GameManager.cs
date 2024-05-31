@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
                 Destroy(Meteors[i]);
             }
             Destroy(GameObject.FindGameObjectWithTag("No.1"));
-            PauseBackTo.makeRecord();
         }
     }
 

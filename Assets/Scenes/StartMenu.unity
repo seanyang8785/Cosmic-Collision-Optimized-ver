@@ -2449,7 +2449,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1308187573}
         m_TargetAssemblyTypeName: StartMemu, Assembly-CSharp
-        m_MethodName: Start
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

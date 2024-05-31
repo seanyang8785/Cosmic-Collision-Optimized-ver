@@ -5,19 +5,29 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.Services.Core;
+using Unity.Services.Authentication;
 
 public class StartMemu : MonoBehaviour
 {
+    public Dictionary<string,int> a;
     void Awake(){
+        UnityServices.InitializeAsync();
         Save.createRecordFile();
         Sprite[] weaponSprites = Resources.LoadAll<Sprite>("Weapons_Btn");
         for(int i = 0;i < GoodsManager.goods_count[0];i++){
+            if(BuyAndEquipWeapon.weapons.ContainsKey(GoodsManager.names[i])){
+                break;
+            }
             BuyAndEquipWeapon.weapons.Add(GoodsManager.names[i],weaponSprites[i]);
         }
 
         Sprite[] skillSprites = Resources.LoadAll<Sprite>("Skills_Btn");
         for(int i = GoodsManager.goods_count[0];i < GoodsManager.names.Count;i++){
-            BuyAndEquipSkill.skills.Add(GoodsManager.names[i],skillSprites[i]);
+            if(BuyAndEquipSkill.skills.ContainsKey(GoodsManager.names[i])){
+                break;
+            }
+            BuyAndEquipSkill.skills.Add(GoodsManager.names[i],skillSprites[i-GoodsManager.goods_count[0]]);
         }
         Debug.Log("Awake");
         Save.readLeaderRecordFile();
@@ -26,11 +36,17 @@ public class StartMemu : MonoBehaviour
 
     private static string HighestRecord_s,YourRecord_s;
     public void Start(){
-        Debug.Log(Screen.height + "\n" + Screen.width);
-        Debug.Log(GameObject.Find("Camera").GetComponent<Camera>().orthographic);
+        // Debug.Log(Screen.height + "\n" + Screen.width);
+        // Debug.Log(GameObject.Find("Camera").GetComponent<Camera>().orthographic);
         Save.readLeaderRecordFile();
         Save.readPlayerRecordFile();
         Debug.Log("Start");
+        if(AuthenticationService.Instance.IsSignedIn){
+            SigningInInit();
+        }
+    }
+
+    public static void SigningInInit(){
         int HighestRecord = Save.rankRecords[0].score;
         int YourRecord = Save.playerRecords[SigningGUI.username];
         if(HighestRecord < 10){

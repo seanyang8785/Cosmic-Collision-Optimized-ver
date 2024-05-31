@@ -6,7 +6,7 @@ using TMPro;
 public class BuyAndEquipSkill : MonoBehaviour
 {
     public static List<string> equipped_skill = new List<string>(){"",""};
-    public static Dictionary<string,Sprite> skills;
+    public static Dictionary<string,Sprite> skills = new Dictionary<string, Sprite>();
     
     void Start(){
         Debug.Log(equipped_skill);

@@ -11,24 +11,10 @@ public class PauseBackTo : MonoBehaviour
     public static bool restarted = false;
 
     public bool pauseBackToStatus = false;
-
-    public static Dictionary<string,int> playerRecords;
-    public static Dictionary<int,Save.playerRecord> rankRecords;
-
-    public void pauseBackTo(){
-        pauseBackToStatus = true;
-    }
     public void backToMainMenu(){
-        makeRecord();
-        if(pauseBackToStatus){
-            LeaderBoard.sendRecordData();
-            pauseBackToStatus = false;
-        }
         Time.timeScale = 1;
-        SceneManager.LoadScene("StartMenu");
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Additive);
-        GameManager.ScoreNum = 0;
-        GameManager.gameover = false;
+        GameManager.gameover = true;
+        SceneManager.LoadScene("LeaderBoard");
     }
 
     public void backToGame(){
@@ -50,20 +36,6 @@ public class PauseBackTo : MonoBehaviour
         PauseGame.PauseStatus = false;
         GameManager.gameover = false;
     } 
-
-    public static void makeRecord(){
-        if(File.Exists(Application.persistentDataPath + "/Players.json") && File.Exists(Application.persistentDataPath + "/Leaders.json")){
-            Save.readPlayerRecordFile();
-            playerRecords[SigningGUI.username] = GameManager.ScoreNum;
-            if(playerRecords[SigningGUI.username] > playerRecords["HighestScore"]){
-                playerRecords["HighestScore"] = playerRecords[SigningGUI.username];
-            }
-
-            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);   
-            sw.WriteLine(JsonConvert.SerializeObject(playerRecords));   
-            sw.Close();
-        }
-    }
 }
 // 012345
 

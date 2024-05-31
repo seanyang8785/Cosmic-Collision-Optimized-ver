@@ -8,30 +8,44 @@ using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour
 {
-    [SerializeField] GameObject leaderBoard;
+    [SerializeField] Button sendBtn;
+    [SerializeField] Button backBtn;
     private void Start() {
+        if(!GameManager.gameover == true){
+            sendBtn.interactable = false;
+            backBtn.interactable = true;
+        }
         updateLeaderBoard();
+    }
+
+    public void Send(){
+        Debug.Log(GameManager.ScoreNum);
+        makeRecord();
+        sendRecordData();
+        updateLeaderBoard();
+        GameManager.ScoreNum = 0;
+        GameManager.gameover = false;
     }
     public static void sendRecordData(){
         StreamReader sr = new StreamReader(Application.persistentDataPath + "/Leaders.json");
-        PauseBackTo.rankRecords = JsonConvert.DeserializeObject<Dictionary<int,Save.playerRecord>>(sr.ReadToEnd());
+        Save.rankRecords = JsonConvert.DeserializeObject<Dictionary<int,Save.playerRecord>>(sr.ReadLine());
         sr.Close(); 
         
-        if(GameManager.ScoreNum > PauseBackTo.rankRecords[1].score){
+        if(GameManager.ScoreNum > Save.rankRecords[1].score){
             updateRank(1);
             Save.playerRecord HighestPlayerRecord = new Save.playerRecord{
                 playerName = "HighestScore",
-                score = PauseBackTo.rankRecords[1].score,
-                weapon = PauseBackTo.rankRecords[1].weapon,
-                skill1 = PauseBackTo.rankRecords[1].skill1,
-                skill2  = PauseBackTo.rankRecords[1].skill2,
+                score = Save.rankRecords[1].score,
+                weapon = Save.rankRecords[1].weapon,
+                skill1 = Save.rankRecords[1].skill1,
+                skill2  = Save.rankRecords[1].skill2,
             };
-            PauseBackTo.rankRecords[0] = HighestPlayerRecord;
+            Save.rankRecords[0] = HighestPlayerRecord;
         }
         else{
             bool update = false;
             for(int i = 2;i <= 5;i++){
-                if(GameManager.ScoreNum > PauseBackTo.rankRecords[i].score){
+                if(GameManager.ScoreNum > Save.rankRecords[i].score){
                     updateRank(i);
                     update = true;
                     break;
@@ -43,9 +57,8 @@ public class LeaderBoard : MonoBehaviour
         }               
         
         StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
-        sw.WriteLine(JsonConvert.SerializeObject(PauseBackTo.rankRecords));                
+        sw.WriteLine(JsonConvert.SerializeObject(Save.rankRecords));                
         sw.Close();
-        updateLeaderBoard();
     }    
 
     public static void updateRank(int rank){
@@ -60,18 +73,18 @@ public class LeaderBoard : MonoBehaviour
         };
 
         if(rank < 5){
-            tmpPlayerRecord[0] = PauseBackTo.rankRecords[rank];
+            tmpPlayerRecord[0] = Save.rankRecords[rank];
             for(int i = rank; i < 5;i++){
                 if(i + 1 < 5){
-                    tmpPlayerRecord[1] = PauseBackTo.rankRecords[i+1];
+                    tmpPlayerRecord[1] = Save.rankRecords[i+1];
                 }
-                PauseBackTo.rankRecords[i+1] = tmpPlayerRecord[0];
+                Save.rankRecords[i+1] = tmpPlayerRecord[0];
                 tmpPlayerRecord[0] = tmpPlayerRecord[1];
             }
-            PauseBackTo.rankRecords[5] = tmpPlayerRecord[0];
+            Save.rankRecords[5] = tmpPlayerRecord[0];
 
         }
-        PauseBackTo.rankRecords[rank] = newPlayerRecord;
+        Save.rankRecords[rank] = newPlayerRecord;
     }
 
     public static void updateLeaderBoard(){
@@ -100,8 +113,43 @@ public class LeaderBoard : MonoBehaviour
             }
 
             if(record.weapon != ""){
-                rank.GetChild(2).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(record.weapon);
+                Image image = rank.GetChild(2).GetChild(0).GetComponent<Image>();
+                image.sprite = BuyAndEquipWeapon.weapons[record.weapon];
+                image.color = new Color32(255,255,255,255);
             }
+
+            if(record.skill1 != ""){
+                Image image = rank.GetChild(2).GetChild(1).GetComponent<Image>();
+                image.sprite = BuyAndEquipSkill.skills[record.skill1];
+                image.color = new Color32(255,255,255,255);
+            }
+
+            if(record.skill1 != ""){
+                Image image = rank.GetChild(2).GetChild(2).GetComponent<Image>();
+                image.sprite = BuyAndEquipSkill.skills[record.skill2];
+                image.color = new Color32(255,255,255,255);
+            }
+        }
+    }
+
+    public static void makeRecord(){
+        if(File.Exists(Application.persistentDataPath + "/Players.json")){
+            Save.readPlayerRecordFile();
+            
+            Debug.Log(JsonConvert.SerializeObject(Save.playerRecords));
+            // Debug.Log(SigningGUI.username);
+            // Debug.Log(Save.playerRecords);
+            if(GameManager.ScoreNum > Save.playerRecords[SigningGUI.username]){
+                Save.playerRecords[SigningGUI.username] = GameManager.ScoreNum ;
+            }
+            if(Save.playerRecords[SigningGUI.username] > Save.playerRecords["HighestScore"]){
+                Save.playerRecords["HighestScore"] = Save.playerRecords[SigningGUI.username];
+            }
+
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);   
+            Debug.Log(JsonConvert.SerializeObject(Save.playerRecords));
+            sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));   
+            sw.Close();
         }
     }
 }

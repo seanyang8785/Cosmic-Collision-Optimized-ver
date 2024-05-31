@@ -40,6 +40,7 @@ public class SigningGUI : MonoBehaviour
                     sw.Close();
                 }
                 changeCanvas();
+                StartMemu.SigningInInit();
                 anonymous = true;
             }
             catch(AuthenticationException ex){
@@ -61,8 +62,14 @@ public class SigningGUI : MonoBehaviour
                     Debug.Log("Signed up with username and password.");
                     PlayerPrefs.DeleteKey("username");
                     PlayerPrefs.SetString("username",username);
-                    Save.playerRecords.Add(username,0);  
+                    if(!Save.playerRecords.ContainsKey(username)){
+                        Save.playerRecords.Add(username,0);  
+                        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
+                        sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
+                        sw.Close();
+                    }  
                     changeCanvas();
+                    StartMemu.SigningInInit();
                 }
                 catch(AuthenticationException ex){
                     Debug.LogException(ex);
@@ -93,6 +100,7 @@ public class SigningGUI : MonoBehaviour
                     sw.Close();
                 }  
                 changeCanvas();
+                StartMemu.SigningInInit();
             }
             catch(AuthenticationException ex){
                 Debug.LogException(ex);

@@ -11,6 +11,7 @@ public class GoodsManager : MonoBehaviour
         public float cd;
         public int difficultyCount;
     }
+
     public static Dictionary<string,goods_info> goods = new Dictionary<string,goods_info>(){};
 
     public static List<int> goods_count = new List<int>(){5,6};
