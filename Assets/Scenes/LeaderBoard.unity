@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RankWithBorder (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
+      propertyPath: m_TagString
+      value: Rank4
+      objectReference: {fileID: 0}
     - target: {fileID: 1104577491912877995, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -936,6 +940,10 @@ PrefabInstance:
     - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_Name
       value: RankWithBorder (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
+      propertyPath: m_TagString
+      value: Rank3
       objectReference: {fileID: 0}
     - target: {fileID: 1104577491912877995, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1775,6 +1783,7 @@ GameObject:
   - component: {fileID: 826167244}
   - component: {fileID: 826167243}
   - component: {fileID: 826167242}
+  - component: {fileID: 826167245}
   m_Layer: 5
   m_Name: Ranks
   m_TagString: Untagged
@@ -1870,6 +1879,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826167240}
   m_CullTransparentMesh: 1
+--- !u!114 &826167245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826167240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860d5fe345ecc664d833ce76fd000e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &842660646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,6 +2054,10 @@ PrefabInstance:
     - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_Name
       value: RankWithBorder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
+      propertyPath: m_TagString
+      value: Rank2
       objectReference: {fileID: 0}
     - target: {fileID: 1104577491912877995, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2367,6 +2392,10 @@ PrefabInstance:
     - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_Name
       value: RankWithBorder (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
+      propertyPath: m_TagString
+      value: Rank5
       objectReference: {fileID: 0}
     - target: {fileID: 1104577491912877995, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3009,7 +3038,7 @@ GameObject:
   - component: {fileID: 1945844762}
   - component: {fileID: 1945844761}
   m_Layer: 5
-  m_Name: Send
+  m_Name: SendBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3078,7 +3107,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1945844762}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 826167245}
+        m_TargetAssemblyTypeName: LeaderBoard, Assembly-CSharp
+        m_MethodName: sendRecordData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1945844761}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1945844762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,6 +3595,10 @@ PrefabInstance:
     - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_Name
       value: RankWithBorder
+      objectReference: {fileID: 0}
+    - target: {fileID: 412959951705111259, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
+      propertyPath: m_TagString
+      value: Rank1
       objectReference: {fileID: 0}
     - target: {fileID: 1104577491912877995, guid: 576ce5f8b1996ab44baff50bc88891cf, type: 3}
       propertyPath: m_AnchorMax.y

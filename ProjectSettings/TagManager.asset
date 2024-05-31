@@ -39,6 +39,11 @@ TagManager:
   - YourRecord
   - HUD
   - Debug
+  - Rank1
+  - Rank2
+  - Rank3
+  - Rank4
+  - Rank5
   layers:
   - Default
   - TransparentFX

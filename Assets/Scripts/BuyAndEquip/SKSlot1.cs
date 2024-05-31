@@ -16,32 +16,10 @@ public class SKSlot1 : MonoBehaviour
             image.sprite = Resources.Load<Sprite>("slot");
             image.color = new Color32(63,117,219,255);
         }else if(BuyAndEquipSkill.equipped_skill[0] != ""){
-            string current_skill1 = BuyAndEquipSkill.equipped_skill[0];
+            // string current_skill1 = BuyAndEquipSkill.equipped_skill[0];
 
-            if(current_skill1 == "TV" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[0];
-                image.color = new Color32(255,255,255,255);
-            }
-            else if(current_skill1 == "TF" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[1];
-                image.color = new Color32(255,255,255,255);
-            }
-            else if(current_skill1 == "ES" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[2];
-                image.color = new Color32(255,255,255,255);
-            }
-            else if(current_skill1 == "SS" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[3];
-                image.color = new Color32(255,255,255,255);
-            }
-            else if(current_skill1 == "EO" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[4];
-                image.color = new Color32(255,255,255,255);
-            }
-            else if(current_skill1 == "QS" && SkillManager.Skill_1_Enabled){
-                image.sprite = BuyAndEquipSkill.skills[5];
-                image.color = new Color32(255,255,255,255);
-            }
+            image.sprite = BuyAndEquipSkill.skills[BuyAndEquipSkill.equipped_skill[0]];
+            image.color = new Color32(255,255,255,255);
         }   
     }
 

@@ -6,7 +6,7 @@ using TMPro;
 public class BuyAndEquipWeapon : MonoBehaviour
 {
     public static string equipped_weapon = "NB";
-    public static Sprite[] weapons;
+    public static Dictionary<string,Sprite> weapons;
 
     void Start(){
         string tag = gameObject.transform.parent.tag;

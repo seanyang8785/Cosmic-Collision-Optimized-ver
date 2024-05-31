@@ -10,8 +10,15 @@ public class StartMemu : MonoBehaviour
 {
     void Awake(){
         Save.createRecordFile();
-        BuyAndEquipWeapon.weapons = Resources.LoadAll<Sprite>("Weapons_Btn");
-        BuyAndEquipSkill.skills = Resources.LoadAll<Sprite>("Skills_Btn");
+        Sprite[] weaponSprites = Resources.LoadAll<Sprite>("Weapons_Btn");
+        for(int i = 0;i < GoodsManager.goods_count[0];i++){
+            BuyAndEquipWeapon.weapons.Add(GoodsManager.names[i],weaponSprites[i]);
+        }
+
+        Sprite[] skillSprites = Resources.LoadAll<Sprite>("Skills_Btn");
+        for(int i = GoodsManager.goods_count[0];i < GoodsManager.names.Count;i++){
+            BuyAndEquipSkill.skills.Add(GoodsManager.names[i],skillSprites[i]);
+        }
         Debug.Log("Awake");
         Save.readLeaderRecordFile();
         Save.readPlayerRecordFile();
@@ -27,9 +34,12 @@ public class StartMemu : MonoBehaviour
         int HighestRecord = Save.rankRecords[0].score;
         int YourRecord = Save.playerRecords[SigningGUI.username];
         if(HighestRecord < 10){
-            HighestRecord_s = "00" + HighestRecord.ToString();
+            HighestRecord_s = "000" + HighestRecord.ToString();
         }
         else if(HighestRecord < 100){
+            HighestRecord_s = "00" + HighestRecord.ToString();
+        }
+        else if(HighestRecord < 1000){
             HighestRecord_s = "0" + HighestRecord.ToString();
         }
         else{
@@ -37,9 +47,12 @@ public class StartMemu : MonoBehaviour
         }
 
         if(YourRecord < 10){
-            YourRecord_s = "00" + YourRecord.ToString();
+            YourRecord_s = "000" + YourRecord.ToString();
         }
         else if(YourRecord < 100){
+            YourRecord_s = "00" + YourRecord.ToString();
+        }
+        else if(YourRecord < 1000){
             YourRecord_s = "0" + YourRecord.ToString();
         }
         else{

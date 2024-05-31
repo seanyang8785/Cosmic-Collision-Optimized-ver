@@ -26,16 +26,10 @@ public class Save : MonoBehaviour
         //     anonymousRecords = JsonConvert.DeserializeObject<SortedSet<string>>(anonymousRecord);
         // }
         if(File.Exists(Application.persistentDataPath+"/Leaders.json") && firstLaunch){
-            StreamReader sr = new StreamReader(Application.persistentDataPath+"/Leaders.json");
-            string leaderRecord = sr.ReadToEnd();
-            rankRecords = JsonConvert.DeserializeObject<Dictionary<int,playerRecord>>(leaderRecord);
-            sr.Close();
+            readLeaderRecordFile();
         }
         if(File.Exists(Application.persistentDataPath+"/Players.json") && firstLaunch){
-            StreamReader sr = new StreamReader(Application.persistentDataPath+"/Players.json");
-            string playerRecord = sr.ReadToEnd();
-            playerRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(playerRecord);
-            sr.Close();
+            readPlayerRecordFile();
         }
         firstLaunch = false;
     }
@@ -82,15 +76,13 @@ public class Save : MonoBehaviour
 
     public static void readLeaderRecordFile(){
         StreamReader sr = new StreamReader(Application.persistentDataPath + "/Leaders.json");
-        string leaderRecord = sr.ReadToEnd();
+        rankRecords = JsonConvert.DeserializeObject<Dictionary<int,playerRecord>>(sr.ReadToEnd());
         sr.Close(); 
-        rankRecords = JsonConvert.DeserializeObject<Dictionary<int,playerRecord>>(leaderRecord);
     }
 
     public static void readPlayerRecordFile(){
         StreamReader sr = new StreamReader(Application.persistentDataPath + "/Players.json");
-        string playerRecord = sr.ReadToEnd();
+        playerRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(sr.ReadToEnd());
         sr.Close(); 
-        playerRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(playerRecord);
     }
 }
