@@ -27,7 +27,7 @@ public class Save : MonoBehaviour
     public static Dictionary<int,playerRecord> rankRecords = new Dictionary<int, playerRecord>();
     public static Dictionary<string,int> playerRecords = new Dictionary<string,int>();
     public static Dictionary<string,player_bought_goods> player_bought_goods_Records = new Dictionary<string,player_bought_goods>(); //working on process 
-
+    public static Dictionary<string,int> coinsRecords = new Dictionary<string,int>();
     void Awake(){
         createRecordFile();
         if(File.Exists(Application.persistentDataPath+"/Leaders.json")){
@@ -38,6 +38,9 @@ public class Save : MonoBehaviour
         }
         if(File.Exists(Application.persistentDataPath+"/Goods.json")){
             readGoodsRecordFile();
+        }
+        if(File.Exists(Application.persistentDataPath+"/Coins.json")){
+            readCoinsRecordFile();
         }
     }
 
@@ -105,6 +108,12 @@ public class Save : MonoBehaviour
         sr.Close(); 
     }
 
+    public static void readCoinsRecordFile(){
+        StreamReader sr = new StreamReader(Application.persistentDataPath + "/Coins.json");
+        coinsRecords = JsonConvert.DeserializeObject<Dictionary<string,int>>(sr.ReadLine());
+        sr.Close(); 
+    }
+
     public static void updateLeaderRecordFile(){
         StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
         sw.WriteLine(JsonConvert.SerializeObject(rankRecords));
@@ -120,6 +129,12 @@ public class Save : MonoBehaviour
     public static void updateGoodsRecordFile(){
         StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Goods.json",append:false);
         sw.WriteLine(JsonConvert.SerializeObject(player_bought_goods_Records));
+        sw.Close(); 
+    }
+
+    public static void updateCoinsRecordFile(){
+        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Coins.json",append:false);
+        sw.WriteLine(JsonConvert.SerializeObject(coinsRecords));
         sw.Close(); 
     }
 }

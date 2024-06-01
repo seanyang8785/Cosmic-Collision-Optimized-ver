@@ -15,7 +15,7 @@ public class SKSlot1 : MonoBehaviour
         if(BuyAndEquipSkill.equipped_skill[0] == ""){
             image.sprite = Resources.Load<Sprite>("slot");
             image.color = new Color32(63,117,219,255);
-        }else if(BuyAndEquipSkill.equipped_skill[0] != ""){
+        }else if(BuyAndEquipSkill.equipped_skill[0] != "" && SkillManager.Skill_1_Enabled){
             // string current_skill1 = BuyAndEquipSkill.equipped_skill[0];
 
             image.sprite = BuyAndEquipSkill.skills[BuyAndEquipSkill.equipped_skill[0]];

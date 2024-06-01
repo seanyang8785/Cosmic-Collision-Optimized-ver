@@ -42,6 +42,19 @@ public class SigningGUI : MonoBehaviour
                     Save.player_bought_goods_Records.Add(username,new Save.player_bought_goods(new Dictionary<string,bool>()));  
                     Save.updateGoodsRecordFile();
                 }
+                else{
+                    Dictionary<string,bool>.ValueCollection c = Save.player_bought_goods_Records[username].goods.Values;
+                    int count = 0;
+                    foreach(bool status in c){
+                        GoodsManager.statuses[count] = status is true ? 1 : 0;
+                        count++;
+                    }
+                    GoodsManager.statuses[0] ++;
+                }
+                if(!Save.coinsRecords.ContainsKey(username)){
+                    Save.playerRecords.Add(username,300);  
+                    Save.updatePlayerRecordFile();
+                }
                 changeCanvas();
                 StartMemu.SigningInInit();
                 anonymous = true;
@@ -72,6 +85,10 @@ public class SigningGUI : MonoBehaviour
                     if(!Save.player_bought_goods_Records.ContainsKey(username)){
                         Save.player_bought_goods_Records.Add(username,new Save.player_bought_goods(new Dictionary<string,bool>()));  
                         Save.updateGoodsRecordFile();
+                    }
+                    if(!Save.coinsRecords.ContainsKey(username)){
+                        Save.playerRecords.Add(username,300);  
+                        Save.updatePlayerRecordFile();
                     }
                     changeCanvas();
                     StartMemu.SigningInInit();
@@ -114,6 +131,10 @@ public class SigningGUI : MonoBehaviour
                         count++;
                     }
                     GoodsManager.statuses[0] ++;
+                }
+                if(!Save.coinsRecords.ContainsKey(username)){
+                    Save.playerRecords.Add(username,300);  
+                    Save.updatePlayerRecordFile();
                 }
                 changeCanvas();
                 StartMemu.SigningInInit();

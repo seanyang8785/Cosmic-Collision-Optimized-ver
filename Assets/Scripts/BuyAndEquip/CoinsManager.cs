@@ -6,11 +6,12 @@ using TMPro;
 public class CoinsManager : MonoBehaviour
 {
     // public static int Coins = 0;
-    public static int Coins = 300;
+    public static int Coins;
 
     void Start(){
         TextMeshProUGUI text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        string Coins_s = Coins.ToString();
+        Save.readCoinsRecordFile();
+        string Coins_s = Save.coinsRecords[SigningGUI.username].ToString();
         while(Coins_s.Length < 5){
             Coins_s = "0" + Coins_s;
         }

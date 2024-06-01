@@ -23,8 +23,7 @@ public class GoodsManager : MonoBehaviour
     static bool first = true;
     void Awake()
     {
-        if(first)
-        {
+        if(first){
             for(int i = 0;i < names.Count;i ++){
                 goods_info good_info_temp = new goods_info
                 {
@@ -35,11 +34,26 @@ public class GoodsManager : MonoBehaviour
                 };
 
                 goods.Add(names[i],good_info_temp);
-                // Debug.Log(names[i]+" " +goods[names[i]].cd.ToString());
+                    // Debug.Log(names[i]+" " +goods[names[i]].cd.ToString());
             }
             first = false;
+            // Debug.Log(first); 
+            // Debug.Log(goods["QS"].status); 
         }
-        // Debug.Log(first); 
-        // Debug.Log(goods["QS"].status); 
+    }
+
+    public static void GoodsInit(){
+        for(int i = 0;i < names.Count;i ++){
+            goods_info good_info_temp = new goods_info
+            {
+                price = prices[i],
+                status = statuses[i],
+                cd = cds[i],
+                difficultyCount = difficultyCounts[i]
+            };
+        
+            goods[names[i]] = good_info_temp;
+            // Debug.Log(names[i]+" " +goods[names[i]].cd.ToString());
+        }
     }
 }

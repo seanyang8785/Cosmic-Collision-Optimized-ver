@@ -11,12 +11,14 @@ public class BuyAndEquipWeapon : MonoBehaviour
     void Start(){
         string tag = gameObject.transform.parent.tag;
         Debug.Log(GoodsManager.goods["NB"].status); 
-        if(GoodsManager.goods[tag].status == 1){
-            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
+        if(GoodsManager.goods[tag].status == 0){
+            text.SetText("Buy it!");
+        }
+        else if(GoodsManager.goods[tag].status == 1){
             text.SetText("Equip!");
         }
         else if(GoodsManager.goods[tag].status == 2){
-            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Unequip!");
         }
     }

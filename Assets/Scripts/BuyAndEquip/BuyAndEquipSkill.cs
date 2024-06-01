@@ -14,16 +14,14 @@ public class BuyAndEquipSkill : MonoBehaviour
         Debug.Log(equipped_skill);
         string tag = gameObject.transform.parent.tag;
         // Debug.Log(GoodsManager.goods["EO"].status);
-        if(GoodsManager.goods[tag].status == 1){
-            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
+        if(GoodsManager.goods[tag].status == 0){
             text.SetText("Buy it!");
         }
         if(GoodsManager.goods[tag].status == 1){
-            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");
         }
         else if(GoodsManager.goods[tag].status == 2){
-            TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Unequip!");
         }
     }

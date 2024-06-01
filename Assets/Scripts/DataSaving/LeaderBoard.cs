@@ -10,11 +10,26 @@ public class LeaderBoard : MonoBehaviour
 {
     [SerializeField] Button sendBtn;
     [SerializeField] Button backBtn;
+
+    [SerializeField] TextMeshProUGUI scoreText;
     private void Start() {
         if(!GameManager.gameover == true){
             sendBtn.interactable = false;
             backBtn.interactable = true;
         }
+        int Score = GameManager.ScoreNum;
+        if(Score < 10){
+            scoreText.text = "000" + Score.ToString();
+        }
+        else if(Score < 100){
+            scoreText.text = "00" + Score.ToString();
+        }
+        else if(Score < 1000){
+            scoreText.text = "0" + Score.ToString();
+        }
+        else{
+            scoreText.text = Score.ToString();
+        } 
         updateLeaderBoard();
     }
 

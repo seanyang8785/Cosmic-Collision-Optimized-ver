@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00000
+  m_text: 0000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 889e6963396f3294e9c27d046a94471c, type: 2}
   m_sharedMaterial: {fileID: -7060647921592497247, guid: 889e6963396f3294e9c27d046a94471c, type: 2}
@@ -2041,6 +2041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendBtn: {fileID: 1945844761}
   backBtn: {fileID: 2058881044}
+  scoreText: {fileID: 377698843}
 --- !u!1 &842660646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3210,7 +3211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.4, y: 0}
+  m_AnchoredPosition: {x: 5.4000015, y: 0}
   m_SizeDelta: {x: -10.799999, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1932389502
