@@ -148,8 +148,7 @@ public class LeaderBoard : MonoBehaviour
     public static void makeRecord(){
         if(File.Exists(Application.persistentDataPath + "/Players.json")){
             Save.readPlayerRecordFile();
-            
-            Debug.Log(JsonConvert.SerializeObject(Save.playerRecords));
+
             // Debug.Log(SigningGUI.username);
             // Debug.Log(Save.playerRecords);
             if(GameManager.ScoreNum > Save.playerRecords[SigningGUI.username]){
@@ -160,6 +159,14 @@ public class LeaderBoard : MonoBehaviour
             }
 
             Save.updatePlayerRecordFile();
+        }
+
+        if(File.Exists(Application.persistentDataPath + "/Coins.json")){
+            Save.readCoinsRecordFile();
+            
+            Save.coinsRecords[SigningGUI.username] += GameManager.ScoreNum;
+
+            Save.updateCoinsRecordFile();
         }
     }
 }

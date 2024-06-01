@@ -23,6 +23,7 @@ public class BuyAndEquipWeapon : MonoBehaviour
         }
     }
     public void OnClick(){
+        Save.readCoinsRecordFile();
         string tag = gameObject.transform.parent.tag;
         int price = GoodsManager.goods[tag].price;
         // Debug.Log(GoodsManager.goods[tag].status); 
@@ -33,11 +34,14 @@ public class BuyAndEquipWeapon : MonoBehaviour
 
             Save.player_bought_goods_Records[SigningGUI.username].goods[tag] = true;
             Save.updateGoodsRecordFile();
-            
+
+            Save.coinsRecords[SigningGUI.username] -= price;
+            Save.updateCoinsRecordFile();
+
             Debug.Log(GoodsManager.goods[tag].status);
             TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");
-            CoinsManager.Coins -= price;
+
             GoodsManager.spend = true;  
         }
         else if(GoodsManager.goods[tag].status == 1 && equipped_weapon == ""){

@@ -8,8 +8,13 @@ public class BackTo : MonoBehaviour
     public void backToMainMenu(){
         // SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         if(!(BuyAndEquipWeapon.equipped_weapon == "")){
-            SceneManager.LoadScene("StartMenu");
+            StartCoroutine(click());
         }
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    IEnumerator click(){
+        yield return new WaitForSeconds(0.15f);
+        SceneManager.LoadScene("StartMenu");
     }
 }

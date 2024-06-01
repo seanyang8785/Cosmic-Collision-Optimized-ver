@@ -36,10 +36,13 @@ public class BuyAndEquipSkill : MonoBehaviour
 
             Save.player_bought_goods_Records[SigningGUI.username].goods[tag] = true;
             Save.updateGoodsRecordFile();
-            
+
+            Save.coinsRecords[SigningGUI.username] -= price;
+            Save.updateCoinsRecordFile();
+
             TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");
-            CoinsManager.Coins -= price;
+
             GoodsManager.spend = true;
         }
         else if(GoodsManager.goods[tag].status == 1 && equipped_skill[1] == ""){

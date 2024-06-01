@@ -11,6 +11,7 @@ public class CoinsManager : MonoBehaviour
     void Start(){
         TextMeshProUGUI text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         Save.readCoinsRecordFile();
+        Coins = Save.coinsRecords[SigningGUI.username];
         string Coins_s = Save.coinsRecords[SigningGUI.username].ToString();
         while(Coins_s.Length < 5){
             Coins_s = "0" + Coins_s;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MTBeAttacked : MonoBehaviour
 {
+    
     void OnTriggerEnter2D(Collider2D collision) {
         // Debug.Log(collision.gameObject.name);
         if(!collision.gameObject.CompareTag("Meteor")){
@@ -16,12 +17,10 @@ public class MTBeAttacked : MonoBehaviour
                 for(int i = 6;i >= 0;i--){
                     if(scale > i * 10 && i * 10 > 0){
                         GameManager.ScoreNum += i * 2;
-                        CoinsManager.Coins +=  i * 2;
                         break;
                     }
                     else if(scale > i * 10 && i * 10 == 0){
                         GameManager.ScoreNum += 1;
-                        CoinsManager.Coins += 1;
                     }
                 }
             }
@@ -41,7 +40,6 @@ public class MTBeAttacked : MonoBehaviour
                 GameObject MTPrefab = (GameObject)Resources.Load("Prefab/Meteor");
                 MTManager.DestroyedSpawn(gameObject.transform.position,gameObject.transform.localScale,MTPrefab);
                 GameManager.ScoreNum += 1;
-                CoinsManager.Coins += 1;
             }
         }
     }

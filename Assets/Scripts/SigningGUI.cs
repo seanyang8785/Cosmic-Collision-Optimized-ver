@@ -52,8 +52,8 @@ public class SigningGUI : MonoBehaviour
                     GoodsManager.statuses[0] ++;
                 }
                 if(!Save.coinsRecords.ContainsKey(username)){
-                    Save.playerRecords.Add(username,300);  
-                    Save.updatePlayerRecordFile();
+                    Save.coinsRecords.Add(username,300);  
+                    Save.updateCoinsRecordFile();
                 }
                 changeCanvas();
                 StartMemu.SigningInInit();
@@ -87,8 +87,8 @@ public class SigningGUI : MonoBehaviour
                         Save.updateGoodsRecordFile();
                     }
                     if(!Save.coinsRecords.ContainsKey(username)){
-                        Save.playerRecords.Add(username,300);  
-                        Save.updatePlayerRecordFile();
+                        Save.coinsRecords.Add(username,300);  
+                        Save.updateCoinsRecordFile();
                     }
                     changeCanvas();
                     StartMemu.SigningInInit();
@@ -133,8 +133,8 @@ public class SigningGUI : MonoBehaviour
                     GoodsManager.statuses[0] ++;
                 }
                 if(!Save.coinsRecords.ContainsKey(username)){
-                    Save.playerRecords.Add(username,300);  
-                    Save.updatePlayerRecordFile();
+                    Save.coinsRecords.Add(username,300);  
+                    Save.updateCoinsRecordFile();
                 }
                 changeCanvas();
                 StartMemu.SigningInInit();
@@ -152,12 +152,18 @@ public class SigningGUI : MonoBehaviour
         if(AuthenticationService.Instance.IsSignedIn){
             if(anonymous){
                 Save.playerRecords.Remove(username);
+                Save.coinsRecords.Remove(username);
+                Save.player_bought_goods_Records.Remove(username);
                 Save.updatePlayerRecordFile();
+                Save.updateCoinsRecordFile();
+                Save.updateGoodsRecordFile();
                 anonymous = false;
             }
             AuthenticationService.Instance.SignOut();
             Debug.Log("Signed out.");
             GoodsManager.statuses = new List<int>(){2,0,0,0,0,0,0,0,0,0,0};
+            BuyAndEquipWeapon.equipped_weapon = "NB";
+            BuyAndEquipSkill.equipped_skill = new List<string>{"",""};
         }
         else{
             Debug.Log("You haven't signed in yet.");

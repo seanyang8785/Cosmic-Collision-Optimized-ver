@@ -14,6 +14,11 @@ public class PauseBackTo : MonoBehaviour
     public void backToMainMenu(){
         Time.timeScale = 1;
         GameManager.gameover = true;
+        StartCoroutine(leaderBoardClick());
+    }
+
+    IEnumerator leaderBoardClick(){
+        yield return new WaitForSeconds(0.15f);
         SceneManager.LoadScene("LeaderBoard");
     }
 
@@ -35,7 +40,15 @@ public class PauseBackTo : MonoBehaviour
         GameManager.Gameover.SetActive(false);
         PauseGame.PauseStatus = false;
         GameManager.gameover = false;
+
+        StartCoroutine(startClick());
     } 
+
+    IEnumerator startClick(){
+        yield return new WaitForSeconds(0.15f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.ScoreNum = 0;
+    }
 }
 // 012345
 

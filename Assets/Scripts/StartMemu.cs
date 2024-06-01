@@ -100,13 +100,24 @@ public class StartMemu : MonoBehaviour
 
     public void PlayGame()
     {
+        StartCoroutine(startClick());
+    }
+
+    IEnumerator startClick(){
+        yield return new WaitForSeconds(0.15f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         GameManager.ScoreNum = 0;
     }
 
     public void Store()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        StartCoroutine(storeClick());
+    }
+
+    IEnumerator storeClick(){
+        yield return new WaitForSeconds(0.15f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.ScoreNum = 0;
     }
 
     public void Reset(){
@@ -138,6 +149,11 @@ public class StartMemu : MonoBehaviour
     }
 
     public void LeaderBoard(){
+        StartCoroutine(leaderBoardClick());
+    }
+
+    IEnumerator leaderBoardClick(){
+        yield return new WaitForSeconds(0.15f);
         SceneManager.LoadScene("LeaderBoard");
     }
 }

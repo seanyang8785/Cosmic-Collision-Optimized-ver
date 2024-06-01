@@ -8,7 +8,6 @@ public class WPSlot : MonoBehaviour
     Image image;
     private void Start() {
         image = gameObject.GetComponent<Image>();
-        image.color = new Color32(255,255,255,0);
         Debug.Log("GameStart");
     }
     void Update()
@@ -23,7 +22,6 @@ public class WPSlot : MonoBehaviour
     }
 
     void FixedUpdate(){
-        Debug.Log("loaded");
         if(!SCAttack.weapon_Enabled){
             Debug.Log("In cd");
             SCAttack.weapon_current_CD -= Time.deltaTime;

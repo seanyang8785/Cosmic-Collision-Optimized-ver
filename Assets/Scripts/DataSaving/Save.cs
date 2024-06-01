@@ -30,22 +30,12 @@ public class Save : MonoBehaviour
     public static Dictionary<string,int> coinsRecords = new Dictionary<string,int>();
     void Awake(){
         createRecordFile();
-        if(File.Exists(Application.persistentDataPath+"/Leaders.json")){
-            readLeaderRecordFile();
-        }
-        if(File.Exists(Application.persistentDataPath+"/Players.json")){
-            readPlayerRecordFile();
-        }
-        if(File.Exists(Application.persistentDataPath+"/Goods.json")){
-            readGoodsRecordFile();
-        }
-        if(File.Exists(Application.persistentDataPath+"/Coins.json")){
-            readCoinsRecordFile();
-        }
     }
 
     public static void createRecordFile(){ //若無紀錄檔則創建
-        if(!File.Exists(Application.persistentDataPath + "/Leaders.json")){            
+        if(!File.Exists(Application.persistentDataPath + "/Leaders.json")){     
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Leaders.json",FileMode.CreateNew);
+            fs.Close();   
             playerRecord highestScorePlayer = new playerRecord{
                 playerName = "HighestScore",
                 score = 0,
@@ -68,6 +58,8 @@ public class Save : MonoBehaviour
         }
 
         if(!File.Exists(Application.persistentDataPath + "/Players.json")){
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Players.json",FileMode.CreateNew);
+            fs.Close();
             StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
             playerRecords.Add("HighestScore",0);
             sw.WriteLine(JsonConvert.SerializeObject(playerRecords));
@@ -75,7 +67,18 @@ public class Save : MonoBehaviour
         }
 
         if(!File.Exists(Application.persistentDataPath + "/Goods.json")){
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Goods.json",FileMode.CreateNew);
+            fs.Close();
             StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Goods.json",append:false);
+            sw.WriteLine(JsonConvert.SerializeObject(player_bought_goods_Records));
+            sw.Close();
+        }
+        
+        if(!File.Exists(Application.persistentDataPath + "/Coins.json")){
+            FileStream fs = new FileStream(Application.persistentDataPath + "/Coins.json",FileMode.CreateNew);
+            fs.Close();
+            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Coins.json",append:false);
+            sw.WriteLine(JsonConvert.SerializeObject(coinsRecords));
             sw.Close();
         }
 
@@ -87,6 +90,9 @@ public class Save : MonoBehaviour
         }
         if(File.Exists(Application.persistentDataPath+"/Goods.json")){
             readGoodsRecordFile();
+        }
+        if(File.Exists(Application.persistentDataPath+"/Coins.json")){
+            readCoinsRecordFile();
         }
     }   
 
