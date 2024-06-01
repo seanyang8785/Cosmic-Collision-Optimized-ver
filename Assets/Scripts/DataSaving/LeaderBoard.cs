@@ -56,9 +56,7 @@ public class LeaderBoard : MonoBehaviour
             }
         }               
         
-        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
-        sw.WriteLine(JsonConvert.SerializeObject(Save.rankRecords));                
-        sw.Close();
+        Save.updateLeaderRecordFile();
     }    
 
     public static void updateRank(int rank){
@@ -124,7 +122,7 @@ public class LeaderBoard : MonoBehaviour
                 image.color = new Color32(255,255,255,255);
             }
 
-            if(record.skill1 != ""){
+            if(record.skill2 != ""){
                 Image image = rank.GetChild(2).GetChild(2).GetComponent<Image>();
                 image.sprite = BuyAndEquipSkill.skills[record.skill2];
                 image.color = new Color32(255,255,255,255);
@@ -146,10 +144,7 @@ public class LeaderBoard : MonoBehaviour
                 Save.playerRecords["HighestScore"] = Save.playerRecords[SigningGUI.username];
             }
 
-            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);   
-            Debug.Log(JsonConvert.SerializeObject(Save.playerRecords));
-            sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));   
-            sw.Close();
+            Save.updatePlayerRecordFile();
         }
     }
 }

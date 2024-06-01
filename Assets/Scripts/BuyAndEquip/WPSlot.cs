@@ -22,6 +22,7 @@ public class WPSlot : MonoBehaviour
 
     void FixedUpdate(){
         if(!SCAttack.weapon_Enabled){
+            Debug.Log(SCAttack.weapon_current_CD);
             SCAttack.weapon_current_CD -= Time.deltaTime;
             if(0.5 < SCAttack.weapon_current_CD/SCAttack.weapon_CD && SCAttack.weapon_current_CD/SCAttack.weapon_CD < 1){
                 image.color = new Color32(255,255,255,85);

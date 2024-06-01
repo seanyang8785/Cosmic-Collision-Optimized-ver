@@ -4,6 +4,7 @@ using Unity.Services.Authentication;
 using TMPro;
 using Unity.Services.Core;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 public class SigningGUI : MonoBehaviour
 {
@@ -35,9 +36,11 @@ public class SigningGUI : MonoBehaviour
                 PlayerPrefs.SetString("username",username);
                 if(!Save.playerRecords.ContainsKey(username)){
                     Save.playerRecords.Add(username,0);  
-                    StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
-                    sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
-                    sw.Close();
+                    Save.updatePlayerRecordFile();
+                }
+                if(!Save.player_bought_goods_Records.ContainsKey(username)){
+                    Save.player_bought_goods_Records.Add(username,new Save.player_bought_goods(new Dictionary<string,bool>()));  
+                    Save.updateGoodsRecordFile();
                 }
                 changeCanvas();
                 StartMemu.SigningInInit();
@@ -64,10 +67,12 @@ public class SigningGUI : MonoBehaviour
                     PlayerPrefs.SetString("username",username);
                     if(!Save.playerRecords.ContainsKey(username)){
                         Save.playerRecords.Add(username,0);  
-                        StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
-                        sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
-                        sw.Close();
-                    }  
+                        Save.updatePlayerRecordFile();
+                    }
+                    if(!Save.player_bought_goods_Records.ContainsKey(username)){
+                        Save.player_bought_goods_Records.Add(username,new Save.player_bought_goods(new Dictionary<string,bool>()));  
+                        Save.updateGoodsRecordFile();
+                    }
                     changeCanvas();
                     StartMemu.SigningInInit();
                 }
@@ -95,10 +100,21 @@ public class SigningGUI : MonoBehaviour
                 PlayerPrefs.SetString("username",username);
                 if(!Save.playerRecords.ContainsKey(username)){
                     Save.playerRecords.Add(username,0);  
-                    StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
-                    sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
-                    sw.Close();
-                }  
+                    Save.updatePlayerRecordFile();
+                }
+                if(!Save.player_bought_goods_Records.ContainsKey(username)){
+                    Save.player_bought_goods_Records.Add(username,new Save.player_bought_goods(new Dictionary<string,bool>()));  
+                    Save.updateGoodsRecordFile();
+                }
+                else{
+                    Dictionary<string,bool>.ValueCollection c = Save.player_bought_goods_Records[username].goods.Values;
+                    int count = 0;
+                    foreach(bool status in c){
+                        GoodsManager.statuses[count] = status is true ? 1 : 0;
+                        count++;
+                    }
+                    GoodsManager.statuses[0] ++;
+                }
                 changeCanvas();
                 StartMemu.SigningInInit();
             }
@@ -115,13 +131,12 @@ public class SigningGUI : MonoBehaviour
         if(AuthenticationService.Instance.IsSignedIn){
             if(anonymous){
                 Save.playerRecords.Remove(username);
-                StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Players.json",append:false);
-                sw.WriteLine(JsonConvert.SerializeObject(Save.playerRecords));
-                sw.Close();
+                Save.updatePlayerRecordFile();
                 anonymous = false;
             }
             AuthenticationService.Instance.SignOut();
             Debug.Log("Signed out.");
+            GoodsManager.statuses = new List<int>(){2,0,0,0,0,0,0,0,0,0,0};
         }
         else{
             Debug.Log("You haven't signed in yet.");

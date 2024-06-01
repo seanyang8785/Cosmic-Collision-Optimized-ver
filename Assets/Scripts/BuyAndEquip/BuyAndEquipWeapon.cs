@@ -28,6 +28,10 @@ public class BuyAndEquipWeapon : MonoBehaviour
             GoodsManager.goods_info good_Info = GoodsManager.goods[tag];
             good_Info.status = 1;
             GoodsManager.goods[tag] = good_Info;
+
+            Save.player_bought_goods_Records[SigningGUI.username].goods[tag] = true;
+            Save.updateGoodsRecordFile();
+            
             Debug.Log(GoodsManager.goods[tag].status);
             TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");

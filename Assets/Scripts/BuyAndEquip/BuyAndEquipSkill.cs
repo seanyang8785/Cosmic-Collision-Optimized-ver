@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
+using Newtonsoft.Json;
 
 public class BuyAndEquipSkill : MonoBehaviour
 {
@@ -33,6 +35,10 @@ public class BuyAndEquipSkill : MonoBehaviour
             GoodsManager.goods_info good_Info = GoodsManager.goods[tag];
             good_Info.status = 1;
             GoodsManager.goods[tag] = good_Info;
+
+            Save.player_bought_goods_Records[SigningGUI.username].goods[tag] = true;
+            Save.updateGoodsRecordFile();
+            
             TextMeshProUGUI text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.SetText("Equip!");
             CoinsManager.Coins -= price;

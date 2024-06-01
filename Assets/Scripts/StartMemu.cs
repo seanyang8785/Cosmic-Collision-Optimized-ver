@@ -119,7 +119,6 @@ public class StartMemu : MonoBehaviour
             // GoodsManager.goods[t]
         }
         if(File.Exists(Application.persistentDataPath + "/Leaders.json")){
-            StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/Leaders.json",append:false);
 
             Dictionary<int,Save.playerRecord> rankRecords = new Dictionary<int, Save.playerRecord>();
             
@@ -129,8 +128,7 @@ public class StartMemu : MonoBehaviour
             };
 
             rankRecords.Add(0,highestScorePlayer);
-            sw.WriteLine(JsonConvert.SerializeObject(rankRecords));
-            sw.Close();
+            Save.updateLeaderRecordFile();
         }
         Start();
     }
