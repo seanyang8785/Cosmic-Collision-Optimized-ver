@@ -4489,7 +4489,7 @@ GameObject:
   - component: {fileID: 2004524839}
   m_Layer: 0
   m_Name: Galaxy
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4582,6 +4582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spacecraft: {fileID: 5353876711115437372, guid: b1f692199f3580c4e8f61003ebf34b48, type: 3}
+  invincible: 1
 --- !u!114 &2004524836
 MonoBehaviour:
   m_ObjectHideFlags: 0

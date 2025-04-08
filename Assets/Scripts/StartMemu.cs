@@ -111,12 +111,12 @@ public class StartMemu : MonoBehaviour
 
     public void Store()
     {
-        StartCoroutine("Store");
+        StartCoroutine(storeClick());
     }
 
     IEnumerator storeClick(){
         yield return new WaitForSeconds(0.15f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Store");
         GameManager.ScoreNum = 0;
     }
 

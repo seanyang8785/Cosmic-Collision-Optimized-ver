@@ -13,7 +13,7 @@ public class SkillManager : MonoBehaviour
     public static int SkillActived = 0;
 
     void Update(){
-        if(Input.GetKeyDown("[") && SkillActived == 0 && BuyAndEquipSkill.equipped_skill[0] != "" && Skill_1_Enabled){
+        if(Input.GetKeyDown("[") && SkillActived == 0 && BuyAndEquipSkill.equipped_skill[0] != "" && Skill_1_Enabled && !GetComponent<SCManager>().invincible){
             Skill_1_CD = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[0]].cd;
             Skill_1_current_CD = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[0]].cd;
             Skill_1_Enabled = false;
@@ -22,7 +22,7 @@ public class SkillManager : MonoBehaviour
             // Debug.Log(SkillActived);
             // Debug.Log(BuyAndEquipSkill.equipped_skill[0]); 
         }
-        else if(Input.GetKeyDown("]") && SkillActived == 0 && BuyAndEquipSkill.equipped_skill[1] != "" && Skill_2_Enabled){
+        else if(Input.GetKeyDown("]") && SkillActived == 0 && BuyAndEquipSkill.equipped_skill[1] != "" && Skill_2_Enabled && !GetComponent<SCManager>().invincible){
             Skill_2_CD = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[1]].cd;
             Skill_2_current_CD = GoodsManager.goods[BuyAndEquipSkill.equipped_skill[1]].cd;
             Skill_2_Enabled = false;

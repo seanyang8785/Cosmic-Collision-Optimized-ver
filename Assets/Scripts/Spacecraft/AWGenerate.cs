@@ -35,7 +35,7 @@ public class AWGenerate : MonoBehaviour
             // }
             GameObject AcousticWaveC = Instantiate(AcousticWave,new Vector3(transform.position.x,transform.position.y,0),Quaternion.Euler(0,0,-SpacecraftFacing));
 
-            AcousticWaveC.transform.localScale = new Vector3(length,length/10,0);
+            AcousticWaveC.transform.localScale = new Vector3(0,length/10,0);
         }
     }
 }

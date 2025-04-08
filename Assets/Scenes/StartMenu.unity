@@ -3949,7 +3949,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8040851587381779844}
         m_TargetAssemblyTypeName: SigningGUI, Assembly-CSharp
-        m_MethodName: signOut
+        m_MethodName: SignUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

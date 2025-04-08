@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour
             difficulty = GoodsManager.goods[BuyAndEquipWeapon.equipped_weapon].difficultyCount;
         }
         
-        if(difficulty <= 3){
+        if(difficulty <= 2){
             MTManager.amount = 2;
         }
-        else if(difficulty <= 6){
+        else if(difficulty <= 5){
             MTManager.amount = 3;
         }
-        else if(difficulty <= 9){
+        else if(difficulty <= 8){
             MTManager.amount = 4;
         }
         else{

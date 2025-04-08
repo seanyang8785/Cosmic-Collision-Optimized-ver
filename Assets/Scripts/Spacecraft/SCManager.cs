@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class SCManager : MonoBehaviour
 {
     [SerializeField] GameObject Spacecraft;
+    GameObject instance;
     public static Sprite[] sprites;
+    public bool invincible = true;
 
     void Start(){
         sprites = Resources.LoadAll<Sprite>("Spacecrafts");
@@ -20,7 +22,17 @@ public class SCManager : MonoBehaviour
 
     public void Spawn(Vector3 Spwanpoint,Quaternion rotation){
         if(GameObject.FindGameObjectWithTag("No.1") == null){
-            Instantiate(Spacecraft, Spwanpoint,rotation);
+            invincible = true;
+            instance = Instantiate(Spacecraft, Spwanpoint,rotation);
+            instance.GetComponent<PolygonCollider2D>().enabled = false;
+            StartCoroutine(Invincible());
         }
+    }
+
+    IEnumerator Invincible(){
+        Debug.Log("invincible");
+        yield return new WaitForSecondsRealtime(5);
+        instance.GetComponent<PolygonCollider2D>().enabled = true;
+        invincible = false;
     }
 }

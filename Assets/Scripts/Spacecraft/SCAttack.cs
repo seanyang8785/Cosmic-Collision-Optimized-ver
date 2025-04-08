@@ -15,11 +15,9 @@ public class SCAttack : MonoBehaviour
     [SerializeField] GameObject TV;
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
-            if(weapon_Enabled){
-                Spawn();
-                weapon_Enabled = false;
-            }
+        if(Input.GetKeyDown(KeyCode.Space) && !GameObject.FindGameObjectWithTag("Manager").GetComponent<SCManager>().invincible && weapon_Enabled){
+            Spawn();
+            weapon_Enabled = false;
         }
     }
 
